@@ -28,7 +28,9 @@
     "url": "https://github.com/brookjordan/sass-styles/issues"
   },
   "devDependencies": {
-    "sass": "^1.26.3",
+    "sass": "^1.26.3"
+  },
+  "dependencies": {
     "sass-styles-utils": "^1.0.0-alpha.7"
   },
   "gitHead": "cf2b5ed9cd46aa1fec016887888f2c8d05b7e892"
