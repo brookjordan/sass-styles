@@ -2,13 +2,13 @@
 
 Define container styles once, use everywhere
 
-# Installation
+## Installation
 
 ```
 npm install sass-styles-containers
 ```
 
-# Usage
+## Usage
 
 As early as possible, include:
 ```scss
@@ -29,11 +29,8 @@ body {
 }
 ```
 ```scss
-// _my-typography-styles.scss
-$families: (/* family names */);
-$sizes: (/* size matching */);
-$weights: (/* weight naming */);
-$rules: (/* rule definitions */);
+// _my-containers.scss
+$styles: (/* rule definitions */);
 ```
 
 Note: Output is *HIGHLY* unoptimised. As such you should include a good CSS minifier as part of your build.
@@ -79,33 +76,33 @@ $styles: (
 ```
 
 
-# Options
+## Options
 
-## $root-font-px-size
+### $root-font-px-size
 
 A Number
 
-## $length-unit
+### $length-unit
 
 `px`, `rem`, or `rem-px`
 
 Note: whichever unit is chosen,
 unitless length values are assumed to be in `px`.
 
-## $styles
+### $styles
 
 
-# “@mixin”s
+## “@mixin”s
 
-## print
+### print
 
-## print-rule
+### print-rule
 
 
-# FAQ
+## FAQ
 
 - [noop](#no-op)
 
-## No op
+### No op
 
 No operation

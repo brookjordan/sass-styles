@@ -1,11 +1,9 @@
-# `utils`
+# SASS Styles — Utils
 
-> TODO: description
+Utilities used by other sass-styles modules
 
-## Usage
+## Installation
 
 ```
-const utils = require('utils');
-
-// TODO: DEMONSTRATE API
+npm install sass-styles-utils
 ```
