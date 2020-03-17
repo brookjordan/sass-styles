@@ -116,18 +116,36 @@ $bing:
   sans-serif,
 ;
 
+$apple:
+  "SF Pro Text",
+  "SF Pro Icons",
+  "Helvetica Neue",
+  "Helvetica",
+  "Arial",
+  sans-serif,
+;
+
+$imdb:
+  Roboto,
+  Helvetica,
+  Arial,
+  sans-serif,
+;
+
 $font-family-sets: (
   qq: $qq,
-  live: $live,
   bing: $bing,
+  imdb: $imdb,
+  live: $live,
+  apple: $apple,
   tmall: $tmall,
   yahoo: $yahoo,
+  amazon: $amazon,
   github: $github,
   google: $google,
-  amazon: $amazon,
   reddit: $reddit,
-  youtube: $youtube,
   netflix: $netflix,
+  youtube: $youtube,
   facebook: $facebook,
   linkedin: $linkedin,
   instagram: $instagram,
