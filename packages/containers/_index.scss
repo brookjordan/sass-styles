@@ -1,0 +1,230 @@
+@use "sass:list" as list;
+@use "sass:map" as map;
+@use "sass:meta" as meta;
+@use "sass:math" as math;
+@use "sass:string" as string;
+
+@use "../utils" as u;
+
+
+$styles: () !default;
+$root-font-px-size: 16 !default;
+
+$length-unit: $sass-typography-length-unit !default;
+$-length-units: px, rem, rem-px;
+@if list.index($-length-units, $length-unit) == null {
+  @error "$length-unit must be one of #{$-length-units} - not #{$length-unit}."
+}
+$preferred-length-unit: rem;
+@if string.index($length-unit, rem) == null {
+  $preferred-length-unit: px;
+}
+
+$-shorthand-map: (
+  padding: top-padding right-padding bottom-padding left-padding,
+  vertical-padding: top-padding bottom-padding,
+  horizontal-padding: left-padding right-padding,
+
+  border-width: top-border-width right-border-width bottom-border-width left-border-width,
+  vertical-border-width: top-border-width bottom-border-width,
+  horizontal-border-width: left-border-width right-border-width,
+
+  border-style: top-border-style right-border-style bottom-border-style left-border-style,
+  vertical-border-style: top-border-style bottom-border-style,
+  horizontal-border-style: left-border-style right-border-style,
+
+  border-color: top-border-color right-border-color bottom-border-color left-border-color,
+  vertical-border-color: top-border-color bottom-border-color,
+  horizontal-border-color: left-border-color right-border-color,
+
+  margin: top-margin right-margin bottom-margin left-margin,
+  vertical-margin: top-margin bottom-margin,
+  horizontal-margin: left-margin right-margin,
+
+  background-position: horizontal-background-position vertical-background-position,
+  background-size: horizontal-background-size vertical-background-size,
+
+  corner-radius: top-left-corner-radius top-right-corner-radius bottom-right-corner-radius bottom-left-corner-radius,
+  top-corner-radius: top-left-corner-radius top-right-corner-radius,
+  right-corner-radius: top-right-corner-radius bottom-right-corner-radius,
+  bottom-corner-radius: bottom-right-corner-radius bottom-left-corner-radius,
+  left-corner-radius: bottom-left-corner-radius top-left-corner-radius,
+);
+
+$-combinable-properties-map: (
+  horizontal-background-size,
+  vertical-background-size,
+  top-left-corner-radius,
+  top-right-corner-radius,
+  bottom-right-corner-radius,
+  bottom-left-corner-radius,
+);
+
+$-combined-properties-map: (
+  background-size: horizontal-background-size vertical-background-size,
+  corner-radius: top-left-corner-radius top-right-corner-radius bottom-right-corner-radius bottom-left-corner-radius,
+);
+
+$-property-map: (
+  left-padding: padding-left,
+  right-padding: padding-right,
+  top-padding: padding-top,
+  bottom-padding: padding-bottom,
+
+  left-border-width: border-left-width,
+  right-border-width: border-right-width,
+  top-border-width: border-top-width,
+  bottom-border-width: border-bottom-width,
+
+  left-border-style: border-left-style,
+  right-border-style: border-right-style,
+  top-border-style: border-top-style,
+  bottom-border-style: border-bottom-style,
+
+  left-border-color: border-left-color,
+  right-border-color: border-right-color,
+  top-border-color: border-top-color,
+  bottom-border-color: border-bottom-color,
+
+  left-margin: margin-left,
+  right-margin: margin-right,
+  top-margin: margin-top,
+  bottom-margin: margin-bottom,
+
+  horizontal-background-position: background-position-x,
+  vertical-background-position: background-position-y,
+
+  horizontal-background-size: background-size,
+  vertical-background-size: background-size,
+
+  top-left-corner-radius: border-top-left-radius,
+  top-right-corner-radius: border-top-right-radius,
+  bottom-right-corner-radius: border-bottom-right-radius,
+  bottom-left-corner-radius: border-bottom-left-radius,
+);
+
+
+$-length-keys: ();
+
+$-length-key-suffixes: (
+  -padding,
+  -margin,
+  -border-width,
+  -radius,
+);
+
+
+@each $style-name, $-style in $styles {
+  $new-keys: null;
+  $style: $-style;
+  @each $shorthand-key, $style-keys in $-shorthand-map {
+    @if map.has-key($style, $shorthand-key) {
+      $value: map.get($style, $shorthand-key);
+      @each $style-key in $style-keys {
+        $new-style: ($style-key: $value);
+        @if $new-keys == null {
+          $new-keys: $new-style;
+        } else {
+          $new-keys: map-merge($new-keys, $new-style);
+        }
+      }
+    }
+  }
+
+  @if $new-keys != null {
+    $styles: map-merge($styles, ($style-name: map-merge($new-keys, $style)));
+  }
+}
+
+
+@function -is-length($property-key) {
+  @if list.index($-length-keys, $property-key) != null {
+    @return true;
+  }
+  @each $suffix in $-length-key-suffixes {
+    @if string.index($property-key, $suffix) != null {
+      @return true;
+    }
+  }
+  @return false;
+}
+
+
+@function -add-unit($value, $unit) {
+  @return u.add-unit($value, $unit, $root-font-px-size);
+}
+
+
+@mixin rule(
+  $style-name,
+  $style-key,
+  $property-name: null,
+  $is-length: null,
+) {
+  $value: u.get-extended($style-name, $style-key, $styles);
+
+  @if $property-name == null {
+    @if map.has-key($-property-map, $style-key) {
+      $property-name: map.get($-property-map, $style-key);
+    } @else {
+      $property-name: $style-key;
+    }
+  }
+
+  @if (
+    meta.type-of($value) == number
+    and (
+      math.unit($value) == px
+      or math.unit($value) == rem
+      or -is-length($style-key)
+    )
+  ) {
+    @if string.index($length-unit, px) {
+      #{$property-name}: -add-unit($value, px);
+    }
+    @if string.index($length-unit, rem) {
+      #{$property-name}: -add-unit($value, rem);
+    }
+  } @else {
+    #{$property-name}: $value;
+  }
+}
+
+
+@mixin style($style-name) {
+  @include rule($style-name, top-padding);
+  @include rule($style-name, right-padding);
+  @include rule($style-name, bottom-padding);
+  @include rule($style-name, left-padding);
+
+  @include rule($style-name, top-border-width);
+  @include rule($style-name, right-border-width);
+  @include rule($style-name, bottom-border-width);
+  @include rule($style-name, left-border-width);
+
+  @include rule($style-name, top-border-style);
+  @include rule($style-name, right-border-style);
+  @include rule($style-name, bottom-border-style);
+  @include rule($style-name, left-border-style);
+
+  @include rule($style-name, top-border-color);
+  @include rule($style-name, right-border-color);
+  @include rule($style-name, bottom-border-color);
+  @include rule($style-name, left-border-color);
+
+  @include rule($style-name, top-margin);
+  @include rule($style-name, right-margin);
+  @include rule($style-name, bottom-margin);
+  @include rule($style-name, left-margin);
+
+  @include rule($style-name, background-color);
+  @include rule($style-name, background-image);
+  @include rule($style-name, background-size);
+  @include rule($style-name, horizontal-background-position);
+  @include rule($style-name, vertical-background-position);
+
+  @include rule($style-name, top-left-corner-radius);
+  @include rule($style-name, top-right-corner-radius);
+  @include rule($style-name, bottom-right-corner-radius);
+  @include rule($style-name, bottom-left-corner-radius);
+}

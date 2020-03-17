@@ -1,0 +1,274 @@
+@use "sass:list" as list;
+@use "sass:map" as map;
+@use "sass:math" as math;
+@use "sass:meta" as meta;
+@use "sass:string" as string;
+
+@use "../utils" as u;
+
+
+$sass-typography-families: () !default;
+$sass-typography-sizes: () !default;
+$sass-typography-weights: () !default;
+$sass-typography-styles: () !default;
+$sass-typography-length-unit: rem !default;
+
+
+$families: $sass-typography-families !default;
+$sizes: $sass-typography-sizes !default;
+$weights: $sass-typography-weights !default;
+$styles: $sass-typography-styles !default;
+
+$root-font-px-size: 16 !default;
+
+$length-unit: $sass-typography-length-unit !default;
+$-length-units: px, rem, rem-px;
+@if list.index($-length-units, $length-unit) == null {
+  @error "$length-unit must be one of #{$-length-units} - not #{$length-unit}."
+}
+$preferred-length-unit: rem;
+@if string.index($length-unit, rem) == null {
+  $preferred-length-unit: px;
+}
+
+$-property-map: (
+  weight: font-weight,
+  family: font-family,
+  size: font-size,
+  variant: font-variant,
+  kerning: font-kerning,
+  size-adjust: font-size-adjust,
+  style: font-style,
+  stretch: font-stretch,
+  feature-settings: font-feature-settings,
+
+  transform: text-transform,
+  shadow: text-shadow,
+  rendering: text-rendering,
+  underline-position: text-underline-position,
+  decoration: text-decoration,
+  decoration-line: text-decoration-line,
+  decoration-style: text-decoration-style,
+  decoration-color: text-decoration-color,
+
+  alternates: font-variant-alternates,
+  caps-variant: font-variant-caps,
+  east-asian-variant: font-variant-east-asian,
+  ligatures-variant: font-variant-ligatures,
+  numeral-variant: font-variant-numeric,
+  position-variant: font-variant-position,
+);
+
+$-length-keys: (
+  size,
+  word-spacing,
+  letter-spacing,
+);
+
+
+@function -is-length($property-key) {
+  @return list.index($-length-keys, $property-key) != null;
+}
+
+
+@function -add-unit($value, $unit) {
+  @return u.add-unit($value, $unit, $root-font-px-size);
+}
+
+
+@function -style($style-name) {
+  @return map.get($styles, $style-name);
+}
+
+
+@function -get($style-name, $style-key) {
+  $raw-value: u.get-extended($style-name, $style-key, $styles);
+
+  @if $raw-value == null {
+    @return null;
+  } @else if -is-length($style-key) {
+    @return -add-unit($raw-value, px);
+  } @else {
+    @return $raw-value;
+  }
+}
+
+
+@function get-value($style-name, $style-key, $unit: null) {
+  $value: null;
+
+  @if $style-key == size {
+    $value: -size-value($style-name);
+  } @else if $style-key == weight {
+    $value: -weight-value($style-name);
+  } @else if $style-key == family {
+    $value: -font-family($style-name);
+  } @else {
+    $value: -get($style-name, $style-key);
+  }
+
+  @if (
+    -is-length($style-key)
+    and (
+      $unit != null
+      or math.is-unitless($value)
+    )
+  ) {
+    $value: -add-unit($value, u.with-fallback($unit, $preferred-length-unit));
+  }
+
+  @return $value;
+}
+
+
+@function -family($style-name) {
+  @return -get($style-name, family);
+}
+
+
+@function -font-family($style-name) {
+  @return map.get($families, -family($style-name));
+}
+
+
+@function -family-weights($style-name) {
+  $family: -family($style-name);
+  @return map.get($weights, -family($style-name));
+}
+
+
+@function -weight($style-name) {
+  @return -get($style-name, weight);
+}
+
+
+@function -weight-value($style-name) {
+  @return map.get(-family-weights($style-name), -weight($style-name));
+}
+
+
+@function -size-adjust($style-name) {
+  @if map.has-key($sizes, -family($style-name)) {
+    @return map.get($sizes, -family($style-name));
+  }
+
+  @return null;
+}
+
+
+@function -size-value($style-name) {
+  $size-value: -get($style-name, size);
+
+  @if $size-value == null {
+    @return null;
+  }
+
+  $size-adjust: -size-adjust($style-name);
+
+  @if $size-adjust == null {
+    @return -get($style-name, size);
+  } @else {
+    @return -get($style-name, size) * $size-adjust;
+  }
+}
+
+
+@mixin rule(
+  $style-name,
+  $style-key,
+  $property-name: null,
+  $is-length: null,
+) {
+  $value: null;
+
+  @if $style-key == weight {
+    $value: -weight-value($style-name);
+  } @else if $style-key == family {
+    $value: -font-family($style-name);
+  }  @else if $style-key == size {
+    $value: -size-value($style-name);
+  } @else {
+    $value: -get($style-name, $style-key);
+  }
+
+  @if $property-name == null {
+    @if map.has-key($-property-map, $style-key) {
+      $property-name: map.get($-property-map, $style-key);
+    } @else {
+      $property-name: $style-key;
+    }
+  }
+
+  @if (
+    meta.type-of($value) == number
+    and (
+      math.unit($value) == px
+      or math.unit($value) == rem
+      or -is-length($style-key)
+    )
+  ) {
+    @if string.index($length-unit, px) {
+      #{$property-name}: -add-unit($value, px);
+    }
+    @if string.index($length-unit, rem) {
+      #{$property-name}: -add-unit($value, rem);
+    }
+  } @else {
+    #{$property-name}: $value;
+  }
+}
+
+
+@mixin style($style-name) {
+  // Special rule properties
+  @include rule($style-name, weight);
+  @include rule($style-name, family);
+  @include rule($style-name, size);
+
+  // Independant properties: order isn’t important
+  @include rule($style-name, line-height);
+  @include rule($style-name, style);
+  @include rule($style-name, transform);
+  @include rule($style-name, underline-position);
+  @include rule($style-name, shadow);
+  @include rule($style-name, rendering);
+  @include rule($style-name, stretch);
+  @include rule($style-name, letter-spacing);
+  @include rule($style-name, word-spacing);
+
+  // Overriding property groups: order is important
+  // - decoration
+  @include rule($style-name, decoration);
+  @include rule($style-name, decoration-line);
+  @include rule($style-name, decoration-style);
+  @include rule($style-name, decoration-color);
+  // - feature-settings
+  @include rule($style-name, feature-settings);
+  @include rule($style-name, variant);
+  @include rule($style-name, kerning);
+  @include rule($style-name, direction);
+  @include rule($style-name, alternates);
+  @include rule($style-name, caps-variant);
+  @include rule($style-name, east-asian);
+  @include rule($style-name, ligatures-variant);
+  @include rule($style-name, numeral-variant);
+  @include rule($style-name, position-variant);
+
+  // These have been purposefully excluded
+  //   as they tend to bloat style rules.
+  // Feel free to make an issue if you can think
+  //   of a good reason to include them.
+  //  - align
+  //  - align-last
+  //  - color
+  //  - direction
+  //  - hyphens
+  //  - indent
+  //  - line-break
+  //  - orientation
+  //  - overflow
+  //  - overflow-wrap
+  //  - white-space
+  //  - word-break
+  //  - writing-mode
+}

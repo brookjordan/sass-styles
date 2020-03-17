@@ -1,0 +1,33 @@
+{
+  "name": "typography",
+  "version": "1.0.0",
+  "description": "Create text styles once, use them everywhere!",
+  "keywords": [
+    "sass",
+    "text",
+    "styles"
+  ],
+  "author": "Brook Jordan <brook@brook.dev>",
+  "homepage": "https://github.com/brookjordan/@sass-styles/blob/master/typography/README.md",
+  "license": "MIT",
+  "main": "_index.scss",
+  "directories": {
+    "test": "__tests__"
+  },
+  "files": [
+    "_index.scss"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brookjordan/%40sass-styles.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/brookjordan/%40sass-styles/issues"
+  },
+  "dependencies": {
+    "sass": "^1.26.3"
+  }
+}
