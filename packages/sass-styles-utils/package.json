@@ -1,14 +1,15 @@
 {
-  "name": "containers",
-  "version": "1.0.0",
-  "description": "Create text styles once, use them everywhere!",
+  "name": "sass-styles-utils",
+  "version": "1.0.0-alpha.1",
+  "description": "Utilities used by the various SASS Styles libraries",
   "keywords": [
     "sass",
-    "containers",
+    "utils",
+    "utilities",
     "styles"
   ],
   "author": "Brook Jordan <brook@brook.dev>",
-  "homepage": "https://github.com/brookjordan/@sass-styles/blob/master/typography/README.md",
+  "homepage": "https://github.com/brookjordan/@sass-styles/blob/master/utils/README.md",
   "license": "MIT",
   "main": "_index.scss",
   "directories": {
