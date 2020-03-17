@@ -4,9 +4,8 @@ Define container styles once, use everywhere
 
 # Installation
 
-NOT YET
 ```
-npm install @sass-styles/containers
+npm install sass-styles-containers
 ```
 
 # Usage

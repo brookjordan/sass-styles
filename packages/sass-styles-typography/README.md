@@ -4,9 +4,8 @@ Define fonts once, use everywhere
 
 # Installation
 
-NOT YET
 ```
-npm install @sass-styles/typography
+npm install sass-styles-typography
 ```
 
 # Usage
