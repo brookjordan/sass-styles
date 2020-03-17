@@ -22,8 +22,7 @@ As early as possible, include:
 ```
 ```scss
 // _base.scss
-@use "sass-styles/containers" as c;
-
+@use "sass-styles-containers" as c;
 body {
   @include c.style(body);
 }
