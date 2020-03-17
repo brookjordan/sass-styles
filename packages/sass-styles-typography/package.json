@@ -1,6 +1,6 @@
 {
   "name": "sass-styles-typography",
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.0-alpha.9",
   "description": "Create text styles once, use them everywhere!",
   "keywords": [
     "sass",
@@ -31,7 +31,7 @@
     "sass": "^1.26.3"
   },
   "dependencies": {
-    "sass-styles-utils": "^1.0.0-alpha.7"
+    "sass-styles-utils": "^1.0.0-alpha.9"
   },
   "gitHead": "cf2b5ed9cd46aa1fec016887888f2c8d05b7e892"
 }
