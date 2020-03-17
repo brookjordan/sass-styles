@@ -25,8 +25,7 @@ As early as possible, include:
 ```
 ```scss
 // _base.scss
-@use "sass-styles/typography" as t;
-
+@use "sass-styles-typography" as t;
 body {
   @include t.style(body);
 }

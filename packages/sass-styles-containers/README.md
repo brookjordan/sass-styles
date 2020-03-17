@@ -47,6 +47,7 @@ $styles: (
 );
 
 /* Usage */
+@use "sass-styles-containers" as c;
 .card {
   &--warning-outline {
     @include c.style(warning-outline);
