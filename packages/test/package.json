@@ -1,15 +1,14 @@
 {
   "name": "sass-typography",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.6",
   "description": "Define fonts once, use everywhere",
   "main": "_t.scss",
-  "dependencies": {},
   "devDependencies": {
     "cssnano": "^4.1.10",
     "postcss-cli": "^7.1.0",
     "sass": "^1.25.0",
-    "sass-styles-containers": "^1.0.0-alpha.5",
-    "sass-styles-typography": "^1.0.0-alpha.5"
+    "sass-styles-containers": "^1.0.0-alpha.6",
+    "sass-styles-typography": "^1.0.0-alpha.6"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
