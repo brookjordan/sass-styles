@@ -1,0 +1,34 @@
+{
+  "name": "sass-typography",
+  "version": "1.0.0-alpha.1",
+  "description": "Define fonts once, use everywhere",
+  "main": "_t.scss",
+  "dependencies": {},
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "postcss-cli": "^7.1.0",
+    "sass": "^1.25.0",
+    "sass-styles-containers": "^1.0.0-alpha.5",
+    "sass-styles-typography": "^1.0.0-alpha.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "styles:dev": "sass app.scss app.css --watch --load-path=node_modules",
+    "styles:prod": "sass app.scss app.css --load-path=node_modules && postcss app.css > app.min.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brookjordan/sass-typography.git"
+  },
+  "keywords": [
+    "sass",
+    "typography",
+    "text"
+  ],
+  "author": "brook@brook.dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brookjordan/sass-typography/issues"
+  },
+  "homepage": "https://github.com/brookjordan/sass-typography#readme"
+}

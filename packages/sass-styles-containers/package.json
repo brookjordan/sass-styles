@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/brookjordan/sass-styles/issues"
   },
-  "dependencies": {
+  "dev-dependencies": {
     "sass": "^1.26.3",
     "sass-styles-utils": "*"
   },
