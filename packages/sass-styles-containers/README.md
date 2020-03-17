@@ -14,7 +14,7 @@ As early as possible, include:
 ```scss
 // entry.scss
 @use "my-containers" as my-containers;
-@use "@sass-styles/containers" with (
+@use "sass-styles/containers" with (
   $styles: my-containers.$styles,
 );
 
@@ -22,7 +22,7 @@ As early as possible, include:
 ```
 ```scss
 // _base.scss
-@use "@sass-styles/containers" as c;
+@use "sass-styles/containers" as c;
 
 body {
   @include c.style(body);

@@ -14,7 +14,7 @@ As early as possible, include:
 ```scss
 // entry.scss
 @use "my-typography-styles" as m-t-s;
-@use "@sass-styles/typography" with (
+@use "sass-styles/typography" with (
   $styles: m-t-s.$styles,
   $sizes: m-t-s.$sizes,
   $weights: m-t-s.$weights,
@@ -25,7 +25,7 @@ As early as possible, include:
 ```
 ```scss
 // _base.scss
-@use "@sass-styles/typography" as t;
+@use "sass-styles/typography" as t;
 
 body {
   @include t.style(body);

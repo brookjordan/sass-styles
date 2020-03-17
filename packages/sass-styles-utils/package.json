@@ -1,6 +1,6 @@
 {
   "name": "sass-styles-utils",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Utilities used by the various SASS Styles libraries",
   "keywords": [
     "sass",
@@ -9,7 +9,7 @@
     "styles"
   ],
   "author": "Brook Jordan <brook@brook.dev>",
-  "homepage": "https://github.com/brookjordan/@sass-styles/blob/master/utils/README.md",
+  "homepage": "https://github.com/brookjordan/sass-styles/blob/master/packages/sass-styles-utils/README.md",
   "license": "MIT",
   "main": "_index.scss",
   "directories": {
@@ -20,13 +20,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brookjordan/%40sass-styles.git"
+    "url": "git+https://github.com/brookjordan/sass-styles.git"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
-    "url": "https://github.com/brookjordan/%40sass-styles/issues"
+    "url": "https://github.com/brookjordan/sass-styles/issues"
   },
   "dependencies": {
     "sass": "^1.26.3"
