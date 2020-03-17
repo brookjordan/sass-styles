@@ -4,7 +4,7 @@
 @use "sass:math" as math;
 @use "sass:string" as string;
 
-@use "../utils" as u;
+@use "sass-styles-utils" as u;
 
 
 $styles: () !default;

@@ -4,7 +4,7 @@
 @use "sass:meta" as meta;
 @use "sass:string" as string;
 
-@use "../utils" as u;
+@use "sass-styles-utils" as u;
 
 
 $sass-typography-families: () !default;

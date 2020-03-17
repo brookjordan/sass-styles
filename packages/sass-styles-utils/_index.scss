@@ -1,0 +1,68 @@
+@use "sass:map" as map;
+@use "sass:math" as math;
+@use "sass:meta" as meta;
+
+
+@function get-extended($style-name, $style-key, $style-map) {
+  @if not map.has-key($style-map, $style-name) {
+    @return null;
+  }
+
+  $style: map.get($style-map, $style-name);
+
+  @if map.has-key($style, $style-key) {
+    @return map.get($style, $style-key);
+  }
+
+  @if map.has-key($style, extend) {
+    @return get-extended(map.get($style, extend), $style-key, $style-map);
+  }
+
+  @return null;
+}
+
+
+@function add-unit($value, $unit, $root-font-px-size: null) {
+  @if meta.type-of($value) != number {
+    @return $value;
+  }
+
+  $value-unit: math.unit($value);
+  @if (
+    $value-unit == $unit
+    or (
+      math.is-unitless($value) == false
+      and $value-unit != rem
+      and $value-unit != px
+    )
+  ) {
+    @return $value;
+  }
+
+  // The value unit doesn’t match the requested unit
+  @if $value-unit == rem {
+    @return $value * $root-font-px-size / 1rem * 1px;
+  }
+
+  @if $value-unit == px {
+    @return $value / $root-font-px-size / 1px * 1rem;
+  }
+
+  // The value had no unit
+  @if $unit == px {
+    @return $value * 1px;
+  }
+
+  @if $unit == rem {
+    @return $value / $root-font-px-size * 1rem;
+  }
+}
+
+
+@function with-fallback($value, $fallback) {
+  @if $value == null {
+    @return $fallback;
+  } @else {
+    @return $value;
+  }
+}
