@@ -1,6 +1,6 @@
 {
   "name": "sass-styles-utils",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Utilities used by the various SASS Styles libraries",
   "keywords": [
     "sass",
