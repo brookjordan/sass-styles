@@ -1,6 +1,6 @@
 {
   "name": "sass-styles-utils",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.2",
   "description": "Utilities used by the various SASS Styles libraries",
   "keywords": [
     "sass",
@@ -30,5 +30,6 @@
   },
   "dependencies": {
     "sass": "^1.26.3"
-  }
+  },
+  "gitHead": "cf2b5ed9cd46aa1fec016887888f2c8d05b7e892"
 }
