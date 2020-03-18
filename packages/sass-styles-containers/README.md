@@ -48,13 +48,13 @@ $styles: (
 /* Usage */
 @use "sass-styles-containers" as c;
 .card {
-  &--warning-outline {
+  &--warning {
     @include c.style(warning-outline);
   }
 }
 
 /* Original output */
-.card--warning-outline {
+.card--warning {
   border-top-width: 5px;
   border-right-width: 5px;
   border-bottom-width: 5px;
@@ -70,9 +70,7 @@ $styles: (
 }
 
 /* After CSS Nano */
-.card--warning {
-  border-top: 5px solid orange
-}
+.card--warning{border:5px solid orange}
 ```
 
 
