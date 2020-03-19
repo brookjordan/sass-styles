@@ -21,95 +21,145 @@ $preferred-length-unit: rem;
 }
 
 $-shorthand-map: (
-  padding: top-padding right-padding bottom-padding left-padding,
-  vertical-padding: top-padding bottom-padding,
-  horizontal-padding: left-padding right-padding,
+  padding: padding-top padding-right padding-bottom padding-left,
+  padding-y: padding-top padding-bottom,
+  padding-x: padding-left padding-right,
 
-  border-width: top-border-width right-border-width bottom-border-width left-border-width,
-  vertical-border-width: top-border-width bottom-border-width,
-  horizontal-border-width: left-border-width right-border-width,
+  border-width: border-top-width border-right-width border-bottom-width border-left-width,
+  border-y-width: border-top-width border-bottom-width,
+  border-x-width: border-left-width border-right-width,
 
-  border-style: top-border-style right-border-style bottom-border-style left-border-style,
-  vertical-border-style: top-border-style bottom-border-style,
-  horizontal-border-style: left-border-style right-border-style,
+  border-style: border-top-style border-right-style border-bottom-style border-left-style,
+  border-y-style: border-top-style border-bottom-style,
+  border-x-style: border-left-style border-right-style,
 
-  border-color: top-border-color right-border-color bottom-border-color left-border-color,
-  vertical-border-color: top-border-color bottom-border-color,
-  horizontal-border-color: left-border-color right-border-color,
+  border-color: border-top-color border-right-color border-bottom-color border-left-color,
+  border-y-color: border-top-color border-bottom-color,
+  border-x-color: border-left-color border-right-color,
 
-  margin: top-margin right-margin bottom-margin left-margin,
-  vertical-margin: top-margin bottom-margin,
-  horizontal-margin: left-margin right-margin,
+  margin: margin-top margin-right margin-bottom margin-left,
+  margin-y: margin-top margin-bottom,
+  margin-x: margin-left margin-right,
 
-  background-position: horizontal-background-position vertical-background-position,
-  background-size: horizontal-background-size vertical-background-size,
+  background-position: background-position-x background-position-y,
+  background-size: background-size-x background-size-y,
 
-  corner-radius: top-left-corner-radius top-right-corner-radius bottom-right-corner-radius bottom-left-corner-radius,
-  top-corner-radius: top-left-corner-radius top-right-corner-radius,
-  right-corner-radius: top-right-corner-radius bottom-right-corner-radius,
-  bottom-corner-radius: bottom-right-corner-radius bottom-left-corner-radius,
-  left-corner-radius: bottom-left-corner-radius top-left-corner-radius,
-);
-
-$-combinable-properties-map: (
-  horizontal-background-size,
-  vertical-background-size,
-  top-left-corner-radius,
-  top-right-corner-radius,
-  bottom-right-corner-radius,
-  bottom-left-corner-radius,
+  border-radius:
+    border-top-left-radius-y
+    border-top-left-radius-x
+    border-top-right-radius-y
+    border-top-right-radius-x
+    border-bottom-right-radius-y
+    border-bottom-right-radius-x
+    border-bottom-left-radius-y
+    border-bottom-left-radius-x,
+  border-top-radius:
+    border-top-left-radius-y
+    border-top-left-radius-x
+    border-top-right-radius-y
+    border-top-right-radius-x,
+  border-right-radius:
+    border-top-right-radius-y
+    border-top-right-radius-x
+    border-bottom-right-radius-y
+    border-bottom-right-radius-x,
+  border-bottom-radius:
+    border-bottom-right-radius-y
+    border-bottom-right-radius-x
+    border-bottom-left-radius-y
+    border-bottom-left-radius-x,
+  border-left-radius:
+    border-bottom-left-radius-y
+    border-bottom-left-radius-x
+    border-top-left-radius-y
+    border-top-left-radius-x,
+  border-top-left-radius:
+    border-top-left-radius-y
+    border-top-left-radius-x,
+  border-top-right-radius:
+    border-top-right-radius-y
+    border-top-right-radius-x,
+  border-bottom-right-radius:
+    border-bottom-right-radius-y
+    border-bottom-right-radius-x,
+  border-bottom-left-radius:
+    border-bottom-left-radius-y
+    border-bottom-left-radius-x,
 );
 
 $-combined-properties-map: (
-  background-size: horizontal-background-size vertical-background-size,
-  corner-radius: top-left-corner-radius top-right-corner-radius bottom-right-corner-radius bottom-left-corner-radius,
+  background-size:
+    background-size-x
+    background-size-y,
+  border-top-left-radius:
+    border-top-left-radius-y
+    border-top-left-radius-x,
+  border-top-right-radius:
+    border-top-right-radius-y
+    border-top-right-radius-x,
+  border-bottom-right-radius:
+    border-bottom-right-radius-y
+    border-bottom-right-radius-x,
+  border-bottom-left-radius:
+    border-bottom-left-radius-y
+    border-bottom-left-radius-x,
 );
+
+$-combinable-properties: ();
+@each $combined-property-name, $-combined-properties in $-combined-properties-map {
+  $-combinable-properties: list.join($-combinable-properties, $-combined-properties);
+}
 
 $-property-map: (
-  left-padding: padding-left,
-  right-padding: padding-right,
-  top-padding: padding-top,
-  bottom-padding: padding-bottom,
+  size: width height,
 
-  left-border-width: border-left-width,
-  right-border-width: border-right-width,
-  top-border-width: border-top-width,
-  bottom-border-width: border-bottom-width,
+  padding-left: padding-left,
+  padding-right: padding-right,
+  padding-top: padding-top,
+  padding-bottom: padding-bottom,
 
-  left-border-style: border-left-style,
-  right-border-style: border-right-style,
-  top-border-style: border-top-style,
-  bottom-border-style: border-bottom-style,
+  border-left-width: border-left-width,
+  border-right-width: border-right-width,
+  border-top-width: border-top-width,
+  border-bottom-width: border-bottom-width,
 
-  left-border-color: border-left-color,
-  right-border-color: border-right-color,
-  top-border-color: border-top-color,
-  bottom-border-color: border-bottom-color,
+  border-left-style: border-left-style,
+  border-right-style: border-right-style,
+  border-top-style: border-top-style,
+  border-bottom-style: border-bottom-style,
 
-  left-margin: margin-left,
-  right-margin: margin-right,
-  top-margin: margin-top,
-  bottom-margin: margin-bottom,
+  border-left-color: border-left-color,
+  border-right-color: border-right-color,
+  border-top-color: border-top-color,
+  border-bottom-color: border-bottom-color,
 
-  horizontal-background-position: background-position-x,
-  vertical-background-position: background-position-y,
+  margin-left: margin-left,
+  margin-right: margin-right,
+  margin-top: margin-top,
+  margin-bottom: margin-bottom,
 
-  horizontal-background-size: background-size,
-  vertical-background-size: background-size,
+  background-position-x: background-position-x,
+  background-position-y: background-position-y,
 
-  top-left-corner-radius: border-top-left-radius,
-  top-right-corner-radius: border-top-right-radius,
-  bottom-right-corner-radius: border-bottom-right-radius,
-  bottom-left-corner-radius: border-bottom-left-radius,
+  background-size-x: background-size,
+  background-size-y: background-size,
+
+  border-top-left-radius: border-top-left-radius,
+  border-top-right-radius: border-top-right-radius,
+  border-bottom-right-radius: border-bottom-right-radius,
+  border-bottom-left-radius: border-bottom-left-radius,
 );
 
 
-$-length-keys: ();
+$-length-keys: (
+  width,
+  height,
+);
 
-$-length-key-suffixes: (
-  -padding,
-  -margin,
-  -border-width,
+$-length-key-parts: (
+  padding-,
+  margin-,
+  -width,
   -radius,
 );
 
@@ -141,7 +191,7 @@ $-length-key-suffixes: (
   @if list.index($-length-keys, $property-key) != null {
     @return true;
   }
-  @each $suffix in $-length-key-suffixes {
+  @each $suffix in $-length-key-parts {
     @if string.index($property-key, $suffix) != null {
       @return true;
     }
@@ -155,7 +205,7 @@ $-length-key-suffixes: (
 }
 
 
-@mixin rule(
+@function -get-rules(
   $style-name,
   $style-key,
   $property-name: null,
@@ -171,6 +221,11 @@ $-length-key-suffixes: (
     }
   }
 
+  @if $value == null {
+    @return ();
+  }
+
+  $rules: ();
   @if (
     meta.type-of($value) == number
     and (
@@ -180,51 +235,108 @@ $-length-key-suffixes: (
     )
   ) {
     @if string.index($length-unit, px) {
-      #{$property-name}: -add-unit($value, px);
+      $rules: map.merge($rules, ($property-name: -add-unit($value, px)));
     }
     @if string.index($length-unit, rem) {
-      #{$property-name}: -add-unit($value, rem);
+      $rules: map.merge($rules, ($property-name: -add-unit($value, rem)));
     }
+    @return($rules);
   } @else {
-    #{$property-name}: $value;
+    @return($property-name: $value);
+  }
+}
+
+
+@function -get-style($style-name) {
+  $rules: ();
+
+  $rules: map.merge($rules, -get-rules($style-name, padding-top));
+  $rules: map.merge($rules, -get-rules($style-name, padding-right));
+  $rules: map.merge($rules, -get-rules($style-name, padding-bottom));
+  $rules: map.merge($rules, -get-rules($style-name, padding-left));
+  $rules: map.merge($rules, -get-rules($style-name, border-top-width));
+  $rules: map.merge($rules, -get-rules($style-name, border-right-width));
+  $rules: map.merge($rules, -get-rules($style-name, border-bottom-width));
+  $rules: map.merge($rules, -get-rules($style-name, border-left-width));
+  $rules: map.merge($rules, -get-rules($style-name, border-top-style));
+  $rules: map.merge($rules, -get-rules($style-name, border-right-style));
+  $rules: map.merge($rules, -get-rules($style-name, border-bottom-style));
+  $rules: map.merge($rules, -get-rules($style-name, border-left-style));
+  $rules: map.merge($rules, -get-rules($style-name, border-top-color));
+  $rules: map.merge($rules, -get-rules($style-name, border-right-color));
+  $rules: map.merge($rules, -get-rules($style-name, border-bottom-color));
+  $rules: map.merge($rules, -get-rules($style-name, border-left-color));
+  $rules: map.merge($rules, -get-rules($style-name, margin-top));
+  $rules: map.merge($rules, -get-rules($style-name, margin-right));
+  $rules: map.merge($rules, -get-rules($style-name, margin-bottom));
+  $rules: map.merge($rules, -get-rules($style-name, margin-left));
+  $rules: map.merge($rules, -get-rules($style-name, background-color));
+  $rules: map.merge($rules, -get-rules($style-name, background-image));
+  $rules: map.merge($rules, -get-rules($style-name, background-size));
+  $rules: map.merge($rules, -get-rules($style-name, background-position-x));
+  $rules: map.merge($rules, -get-rules($style-name, background-position-y));
+  $rules: map.merge($rules, -get-rules($style-name, border-top-left-radius-y));
+  $rules: map.merge($rules, -get-rules($style-name, border-top-left-radius-x));
+  $rules: map.merge($rules, -get-rules($style-name, border-top-right-radius-y));
+  $rules: map.merge($rules, -get-rules($style-name, border-top-right-radius-x));
+  $rules: map.merge($rules, -get-rules($style-name, border-bottom-right-radius-y));
+  $rules: map.merge($rules, -get-rules($style-name, border-bottom-right-radius-x));
+  $rules: map.merge($rules, -get-rules($style-name, border-bottom-left-radius-y));
+  $rules: map.merge($rules, -get-rules($style-name, border-bottom-left-radius-x));
+
+  $new-rules: ();
+  $used-rules: ();
+  @each $rule-name, $rule-value in $rules {
+    // $-combined-properties-map
+    // $-combinable-properties
+    @if list.index($-combinable-properties, $rule-name) == null {
+      $new-rules: map.merge($new-rules, ($rule-name: $rule-value));
+    } @else if list.index($used-rules, $rule-name) == null {
+      $combined-property-name: null;
+      $combining-property-names: null;
+      $combined-property-value: ();
+      @each $name, $values in $-combined-properties-map {
+        @if list.index($values, $rule-name) != null {
+          $combined-property-name: $name;
+          $combining-property-names: $values;
+        }
+      }
+      @each $combining-property-name in $combining-property-names {
+        @if map.has-key($rules, $combining-property-name) == false {
+          @error "#{$combining-property-name} is missing in #{$rule-name}"
+        }
+        $combining-property-value: map.get($rules, $combining-property-name);
+        $combined-property-value: list.append($combined-property-value, $combining-property-value);
+      }
+      $new-rules: map.merge($new-rules, ($combined-property-name: $combined-property-value));
+      $used-rules: list.join($used-rules, $combining-property-names);
+    }
+  }
+
+  @return $new-rules;
+}
+
+
+@mixin rule(
+  $style-name,
+  $style-key,
+  $property-name: null,
+  $is-length: null,
+) {
+  $rules: -get-rules(
+    $style-name,
+    $style-key,
+    $property-name: null,
+    $is-length: null,
+  );
+  @each $rule-name, $rule-value in $rules {
+    #{$rule-name}: $rule-value;
   }
 }
 
 
 @mixin style($style-name) {
-  @include rule($style-name, top-padding);
-  @include rule($style-name, right-padding);
-  @include rule($style-name, bottom-padding);
-  @include rule($style-name, left-padding);
-
-  @include rule($style-name, top-border-width);
-  @include rule($style-name, right-border-width);
-  @include rule($style-name, bottom-border-width);
-  @include rule($style-name, left-border-width);
-
-  @include rule($style-name, top-border-style);
-  @include rule($style-name, right-border-style);
-  @include rule($style-name, bottom-border-style);
-  @include rule($style-name, left-border-style);
-
-  @include rule($style-name, top-border-color);
-  @include rule($style-name, right-border-color);
-  @include rule($style-name, bottom-border-color);
-  @include rule($style-name, left-border-color);
-
-  @include rule($style-name, top-margin);
-  @include rule($style-name, right-margin);
-  @include rule($style-name, bottom-margin);
-  @include rule($style-name, left-margin);
-
-  @include rule($style-name, background-color);
-  @include rule($style-name, background-image);
-  @include rule($style-name, background-size);
-  @include rule($style-name, horizontal-background-position);
-  @include rule($style-name, vertical-background-position);
-
-  @include rule($style-name, top-left-corner-radius);
-  @include rule($style-name, top-right-corner-radius);
-  @include rule($style-name, bottom-right-corner-radius);
-  @include rule($style-name, bottom-left-corner-radius);
+  @each $property-name, $property-value in -get-style($style-name) {
+    #{$property-name}: $property-value;
+  }
 }

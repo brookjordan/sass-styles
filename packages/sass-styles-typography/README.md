@@ -10,7 +10,7 @@ npm install sass-styles-typography
 
 ## Modules
 
-There are vrious `@import`able modules included in this package. These are:
+There are various `@import`able modules included in this package. These are:
 - `sass-styles-typography`: `style` mixin and accompanying tools
 - `sass-styles-typography/font-family-sets`: various well-defined `font-family` sets
 

@@ -61,6 +61,7 @@ $-property-map: (
 
 $-length-keys: (
   size,
+  font-size,
   word-spacing,
   letter-spacing,
 );
@@ -97,11 +98,11 @@ $-length-keys: (
 @function get-value($style-name, $style-key, $unit: null) {
   $value: null;
 
-  @if $style-key == size {
+  @if list.index(size font-size, $style-key) != null {
     $value: -size-value($style-name);
-  } @else if $style-key == weight {
+  } @else if list.index(weight font-weight, $style-key) != null {
     $value: -weight-value($style-name);
-  } @else if $style-key == family {
+  } @else if list.index(family font-family, $style-key) != null {
     $value: -font-family($style-name);
   } @else {
     $value: -get($style-name, $style-key);
