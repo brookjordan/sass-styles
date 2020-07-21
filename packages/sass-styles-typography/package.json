@@ -1,6 +1,6 @@
 {
   "name": "sass-styles-typography",
-  "version": "1.0.0-alpha.13",
+  "version": "1.0.0-alpha.15",
   "description": "Create text styles once, use them everywhere!",
   "keywords": [
     "sass",
@@ -8,7 +8,7 @@
     "styles"
   ],
   "author": "Brook Jordan <brook@brook.dev>",
-  "homepage": "https://github.com/brookjordan/sass-styles/blob/master/packages/sass-styles-typography/README.md",
+  "homepage": "https://github.com/brookjordan/sass-styles/tree/master/packages/sass-styles-typography",
   "license": "MIT",
   "main": "_index.scss",
   "directories": {
@@ -33,5 +33,5 @@
   "dependencies": {
     "sass-styles-utils": "^1.0.0-alpha.9"
   },
-  "gitHead": "cf2b5ed9cd46aa1fec016887888f2c8d05b7e892"
+  "gitHead": "6af5f3711d21f4a8f40a887e67d3783e54f61c2e"
 }
