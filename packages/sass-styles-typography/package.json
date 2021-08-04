@@ -1,6 +1,6 @@
 {
   "name": "sass-styles-typography",
-  "version": "1.0.0-alpha.15",
+  "version": "1.0.0-alpha.17",
   "description": "Create text styles once, use them everywhere!",
   "keywords": [
     "sass",
@@ -28,10 +28,10 @@
     "url": "https://github.com/brookjordan/sass-styles/issues"
   },
   "devDependencies": {
-    "sass": "^1.26.3"
+    "sass": "^1.37.5"
   },
   "dependencies": {
-    "sass-styles-utils": "^1.0.0-alpha.9"
+    "sass-styles-utils": "workspace:packages/sass-styles-utils"
   },
   "gitHead": "6af5f3711d21f4a8f40a887e67d3783e54f61c2e"
 }
