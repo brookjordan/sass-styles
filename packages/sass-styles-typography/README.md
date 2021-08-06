@@ -17,8 +17,16 @@ There are various `@use`able modules included in this package. These are:
 
 ### Usage
 
-As early as possible, assuming `_my-typography-styles.scss` exists and contains
-your font styles, include:
+Assuming `_my-typography-styles.scss` exists and contains your font styles, something like:
+```scss
+// _my-typography-styles.scss
+$families: (/* family names */);
+$sizes: (/* size matching */);
+$weights: (/* weight naming */);
+$styles: (/* rule definitions */);
+```
+
+then as early as possible include:
 ```scss
 // entry.scss
 @use "my-typography-styles" as m-t-s;
@@ -29,21 +37,16 @@ your font styles, include:
   $families: m-t-s.$families,
 );
 
-@use "base";
+@use "some-styles";
 ```
+
+This has primed the library for later usage:
 ```scss
-// _base.scss
+// _some-styles.scss
 @use "sass-styles-typography" as t;
 body {
   @include t.style(body);
 }
-```
-```scss
-// _my-typography-styles.scss
-$families: (/* family names */);
-$sizes: (/* size matching */);
-$weights: (/* weight naming */);
-$styles: (/* rule definitions */);
 ```
 
 
@@ -113,6 +116,7 @@ font weights while: keeping control of how everything looks; and enforcing the
 
 **example**
 
+```scss
 $weights: (
   body: (
     normal: 300,
@@ -123,6 +127,7 @@ $weights: (
     bold: 700,
   ),
 );
+```
 
 #### $styles
 
@@ -186,29 +191,55 @@ For those of you who like the sugar, here is a list of the aliases:
 
 #### style
 
+Include a full style:
+
+```scss
+body {
+  @include font.style('body');
+}
+```
+
 #### rule
+
+Add a single rule:
+
+```scss
+body {
+  @include font.rule('body', color);
+}
+```
 
 
 ### “@function”s
 
 #### get-value
 
+Get the value of a single rule:
+
+```scss
+body {
+  color: font.get('body', color);
+  font-size: font.get('body', size, 'px');
+  font-size: font.get('body', size, 'rem');
+}
+```
+
 When `get`ting `size` you may also pass `$unit` as a third parameter
-to explicitly request eithr the `px` or `rem` values.
+to explicitly request either the `px` or `rem` values.
 By default this will return in the same unit as `$length-unit`,
 or `rem` if `$length-unit` is `rem-px`.
 
 
 ### FAQ
 
-- [I get the error: Error: Can't find stylesheet to import](#i-get-the-error-error-cant-find-stylesheet-to-import)
+- [I get the error: Error: Can’t find stylesheet to import](#i-get-the-error-error-cant-find-stylesheet-to-import)
 - [My version of SASS doesn’t have @use and I can’t upgrade](#my-version-of-sass-doesnt-have-use-and-i-cant-upgrade)
 
-#### I get the error: Error: Can't find stylesheet to import
+#### I get the error: Error: Can’t find stylesheet to import
 
 If you have installed SASS Typography via npm or yarn you will
-need to add `--load-path=node_modules` to your call too sass.\
-Something like: `sass app.scss app.css --watch --load-path=node_modules`
+need to add `SASS_PATH=node_modules` to your call too sass.\
+Something like: `SASS_PATH=node_modules sass app.scss app.css --watch`
 
 Alternatively you can copy the `_t.scss` file into your own file directory.
 Then you can `@use` that file directly.
@@ -217,6 +248,6 @@ However, this means you will need to do updates manually.
 #### My version of SASS doesn’t have @use and I can’t upgrade
 
 This should be fine, and should work as normal without the initial `@use`.
-The only issue may be that you now have functions with less readable names,
-if this becomes an issue for many people I will look into making less clashy
+The only issue may be that you now have functions with less readable names.\
+If this becomes an issue for many people I will look into making less clashy
 aliases for mixins and functions.
