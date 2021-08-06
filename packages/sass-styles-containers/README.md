@@ -14,7 +14,7 @@ As early as possible, include:
 ```scss
 // entry.scss
 @use "my-containers" as my-containers;
-@use "sass-styles/containers" with (
+@use "sass-styles-containers" with (
   $styles: my-containers.$styles,
 );
 

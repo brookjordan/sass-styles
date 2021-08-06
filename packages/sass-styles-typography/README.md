@@ -10,18 +10,19 @@ npm install sass-styles-typography
 
 ## Modules
 
-There are various `@import`able modules included in this package. These are:
+There are various `@use`able modules included in this package. These are:
 - `sass-styles-typography`: `style` mixin and accompanying tools
 - `sass-styles-typography/font-family-sets`: various well-defined `font-family` sets
 
 
 ### Usage
 
-As early as possible, include:
+As early as possible, assuming `_my-typography-styles.scss` exists and contains
+your font styles, include:
 ```scss
 // entry.scss
 @use "my-typography-styles" as m-t-s;
-@use "sass-styles/typography" with (
+@use "sass-styles-typography" with (
   $styles: m-t-s.$styles,
   $sizes: m-t-s.$sizes,
   $weights: m-t-s.$weights,
@@ -61,12 +62,125 @@ unitless length values are assumed to be in `px`.
 
 #### $families
 
+When using `family:` in a style, the value refers to one of the families defined here.
+This allows you to name families by their use-case so that if branding changes further
+down the line you only need to update the `font-family` here.
+
+This list of families is also used for `weights` and `sizes` further along.
+
+**example**
+
+```scss
+$families: (
+  body: times, serif,
+  heading: arial, sans-serif,
+);
+```
+
 #### $sizes
+
+Fonts come in all different shapes and sizes, and sometimes a font-size for one font is
+not the same as another font. So if, for example, you found that the heading font needed
+to be 0.95 times the size of the body font, you could set up the sizes object as shown
+here, then using the same size will actually display the texts at the same size:
+
+**example**
+
+```scss
+// to even the sizes out, you can do one of the following:
+
+// you can display headings slighly smaller:
+$sizes: (
+  body: 1,
+  heading: 0.95,
+);
+
+// or you can display body slighly larger:
+$sizes: (
+  body: 1.05,
+  heading: 1,
+);
+```
 
 #### $weights
 
+Similarly to sizes, but here we will likely display multiple weights.
+Websites often use a minimal number of font weights, but maybe for bold text you want
+`600` on one font, and `700` on another. And maybe the “normal” weight for body text is too
+bold, so you want it to be `300`, rather than `400`. This allows you to use the nice named
+font weights while: keeping control of how everything looks; and enforcing the
+`font-weight`s being used.
+
+**example**
+
+$weights: (
+  body: (
+    normal: 300,
+    bold: 600,
+  ),
+  heading: (
+    normal: 400,
+    bold: 700,
+  ),
+);
+
 #### $styles
 
+And here you define all of your named styles:
+
+```scss
+$styles: (
+  blog-title: (
+    family: heading,
+    size: 24,
+    weight: normal,
+    tracking: -0.01,
+  ),
+  section-heading: (
+    extend: blog-title,
+    size: 20,
+    weight: bold,
+  ),
+  body: (
+    family: body,
+    size: 16,
+    weight: normal,
+  ),
+);
+```
+
+Note the usage of typographic words, and abbreviations for various keys.
+These are purely sugar and are aliases of the real names, you may use the
+vanilla CSS names if you prefer.
+For those of you who like the sugar, here is a list of the aliases:
+
+- `weight` <sub><sup>→</sup></sub> `font-weight`
+- `family` <sub><sup>→</sup></sub> `font-family`
+- `size` <sub><sup>→</sup></sub> `font-size`
+- `variant` <sub><sup>→</sup></sub> `font-variant`
+- `kerning` <sub><sup>→</sup></sub> `font-kerning`
+- `tracking` <sub><sup>→</sup></sub> `letter-spacing`
+- `leading` <sub><sup>→</sup></sub> `line-height`
+- `size-adjust` <sub><sup>→</sup></sub> `font-size-adjust`
+- `style` <sub><sup>→</sup></sub> `font-style`
+- `stretch` <sub><sup>→</sup></sub> `font-stretch`
+- `feature-settings` <sub><sup>→</sup></sub> `font-feature-settings`
+
+- `transform` <sub><sup>→</sup></sub> `text-transform`
+- `shadow` <sub><sup>→</sup></sub> `text-shadow`
+- `rendering` <sub><sup>→</sup></sub> `text-rendering`
+- `underline-position` <sub><sup>→</sup></sub> `text-underline-position`
+- `decoration` <sub><sup>→</sup></sub> `text-decoration`
+- `decoration-line` <sub><sup>→</sup></sub> `text-decoration-line`
+- `decoration-style` <sub><sup>→</sup></sub> `text-decoration-style`
+- `decoration-color` <sub><sup>→</sup></sub> `text-decoration-color`
+
+- `alternates` <sub><sup>→</sup></sub> `font-variant-alternates`
+- `caps-variant` <sub><sup>→</sup></sub> `font-variant-caps`
+- `east-asian-variant` <sub><sup>→</sup></sub> `font-variant-east-asian`
+- `ligatures-variant` <sub><sup>→</sup></sub> `font-variant-ligatures`
+- `numeral-variant` <sub><sup>→</sup></sub> `font-variant-numeric`
+- `position-variant` <sub><sup>→</sup></sub> `font-variant-position`
 
 ### “@mixin”s
 
