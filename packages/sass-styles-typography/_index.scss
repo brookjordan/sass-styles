@@ -37,6 +37,8 @@ $-property-map: (
   size: font-size,
   variant: font-variant,
   kerning: font-kerning,
+  tracking: letter-spacing,
+  leading: line-height,
   size-adjust: font-size-adjust,
   style: font-style,
   stretch: font-stretch,
@@ -227,6 +229,7 @@ $-length-keys: (
   @include rule($style-name, size);
 
   // Independant properties: order isn’t important
+  @include rule($style-name, color);
   @include rule($style-name, line-height);
   @include rule($style-name, style);
   @include rule($style-name, transform);
@@ -261,7 +264,6 @@ $-length-keys: (
   //   of a good reason to include them.
   //  - align
   //  - align-last
-  //  - color
   //  - direction
   //  - hyphens
   //  - indent
