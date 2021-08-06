@@ -1,6 +1,6 @@
 {
   "name": "sass-styles-typography",
-  "version": "1.0.0-alpha.20",
+  "version": "1.2.0-1",
   "description": "Create text styles once, use them everywhere!",
   "keywords": [
     "sass",
@@ -22,7 +22,8 @@
     "url": "git+https://github.com/brookjordan/sass-styles.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "bump": "npm version prerelease"
   },
   "bugs": {
     "url": "https://github.com/brookjordan/sass-styles/issues"

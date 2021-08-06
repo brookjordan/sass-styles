@@ -10,7 +10,8 @@
     "./packages/*"
   ],
   "scripts": {
-    "publish": "yarn workspaces foreach npm publish"
+    "publish": "yarn bump && yarn workspaces foreach npm publish",
+    "bump": "yarn workspaces foreach run bump"
   },
   "dependencies": {
     "global": "^4.4.0"
