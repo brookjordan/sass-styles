@@ -4,7 +4,7 @@ Define fonts once, use everywhere
 
 ## Installation
 
-```
+```shell
 npm install sass-styles-typography
 ```
 
@@ -17,7 +17,8 @@ There are various `@use`able modules included in this package. These are:
 
 ### Usage
 
-Assuming `_my-typography-styles.scss` exists and contains your font styles, something like:
+Assuming `_my-typography-styles.scss` exists and contains your font styles,
+something like:
 ```scss
 // _my-typography-styles.scss
 $families: (/* family names */);
@@ -54,11 +55,16 @@ body {
 
 #### $root-font-px-size
 
-A Number
+Only used if relative ems are being printed.\
+This must be the default font-size of the root element.
+In a browser that would be the `<html>` element.
+This is used to calculate how many relative ems a pixel equates to.
 
 #### $length-unit
 
-`px`, `rem`, or `rem-px`
+`px`: only print pixels
+`rem`: only print relative ems
+`rem-px`: print relative ems with a pixels fallback
 
 Note: whichever unit is chosen,
 unitless length values are assumed to be in `px`.
